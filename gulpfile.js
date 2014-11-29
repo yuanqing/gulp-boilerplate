@@ -10,7 +10,7 @@ var plumber = require('gulp-plumber');
 var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var karma = require('karma').server;
-var shell = require('gulp-shell');
+var run = require('gulp-run');
 
 var moduleName = 'foo';
 
@@ -23,11 +23,7 @@ var paths = {
   test: ['test/**/*.spec.js']
 };
 
-var defaultTasks = ['bench', 'lint', 'test', 'test-browser'];
-
-gulp.task('bench', shell.task([
-  'node_modules/.bin/matcha',
-]));
+var defaultTasks = ['lint', 'test', 'test-browser', 'bench'];
 
 gulp.task('lint', function() {
   return gulp.src([].concat(__filename, paths.benchmark, paths.karmaConf, paths.src, paths.test))
@@ -80,6 +76,10 @@ gulp.task('test-browser', ['dist'], function(cb) {
     configFile: paths.karmaConf,
     singleRun: true
   }, cb);
+});
+
+gulp.task('bench', function(cb) {
+  run('node_modules/.bin/matcha').exec(cb);
 });
 
 gulp.task('watch', defaultTasks, function() {
