@@ -15,7 +15,7 @@ var run = require('gulp-run');
 var moduleName = 'foo';
 
 var paths = {
-  benchmark: ['benchmark/*.js'],
+  benchmark: 'benchmark.js',
   coverage: 'coverage/',
   dist: 'dist/',
   karmaConf: __dirname + '/karma.conf.js',
@@ -79,7 +79,7 @@ gulp.task('test-browser', ['dist'], function(cb) {
 });
 
 gulp.task('bench', function(cb) {
-  run('node_modules/.bin/matcha').exec(cb);
+  run('node_modules/.bin/matcha ' + paths.benchmark).exec(cb);
 });
 
 gulp.task('watch', defaultTasks, function() {

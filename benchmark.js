@@ -1,7 +1,7 @@
 /* globals suite, set, bench */
 'use strict';
 
-var foo = require('../index.js');
+var foo = require('./index.js');
 
 suite('foo', function() {
 
