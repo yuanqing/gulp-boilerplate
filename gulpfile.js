@@ -11,8 +11,7 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var karma = require('karma').server;
 var run = require('gulp-run');
-
-var moduleName = 'foo';
+var packageName = require('./package.json').name;
 
 var paths = {
   benchmark: 'benchmark.js',
@@ -40,11 +39,11 @@ gulp.task('dist', ['clean'], function() {
   return gulp.src(paths.src, { read: false })
     .pipe(plumber())
     .pipe(browserify({
-      debug: true, // generate sourcemaps
+      debug: true, // generate source map
       insertGlobals: false,
-      standalone: moduleName
+      standalone: packageName
     }))
-    .pipe(rename({ basename: moduleName }))
+    .pipe(rename({ basename: packageName }))
     .pipe(gulp.dest(paths.dist))
     .pipe(rename({ suffix: '.min' }))
     .pipe(uglify())
