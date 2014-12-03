@@ -11,6 +11,7 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var karma = require('karma').server;
 var run = require('gulp-run');
+
 var packageName = require('./package.json').name;
 
 var paths = {
@@ -22,7 +23,7 @@ var paths = {
   test: ['test/**/*.spec.js']
 };
 
-var defaultTasks = ['lint', 'test', 'test-browser', 'bench'];
+var defaultTasks = ['lint', 'test', 'test-b', 'bench'];
 
 gulp.task('lint', function() {
   return gulp.src([].concat(__filename, paths.benchmark, paths.karmaConf, paths.src, paths.test))
@@ -70,7 +71,7 @@ gulp.task('test', ['dist'], function(cb) {
     });
 });
 
-gulp.task('test-browser', ['dist'], function(cb) {
+gulp.task('test-b', ['dist'], function(cb) {
   karma.start({
     configFile: paths.karmaConf,
     singleRun: true
